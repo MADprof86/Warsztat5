@@ -1,10 +1,7 @@
 package pl.coderslab.controlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.classes.Book;
 import pl.coderslab.classes.MockBookService;
 
@@ -16,10 +13,7 @@ import java.util.Optional;
 public class BookController {
     private final MockBookService mockBookService = new MockBookService();
 
-//    @Autowired
-//    public BookController(MockBookService mockBookService){
-//        this.mockBookService = mockBookService;
-//    }
+
     @RequestMapping("/helloBook")
     public Book helloBook(){
         return new Book(1, "978832463", "Thinking in Java",
@@ -33,5 +27,18 @@ public class BookController {
     public Optional<Book> getBook(@PathVariable Long id){
         return mockBookService.get(id);
     }
+    @PostMapping
+    public void createBook(@RequestBody Book book){
+        mockBookService.add(book);
+    }
+    @PutMapping
+    public void updateBook(@RequestBody Book book){
+        mockBookService.add(book);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable Long id){
+        mockBookService.delete(id);
+    }
+
 
 }
